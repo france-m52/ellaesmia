@@ -260,8 +260,15 @@ p {
 .date-message {
     background: linear-gradient(135deg, #ffeff3, #ffe4ec);
     border-radius: 15px;
-    padding: 20px;
-    margin-top: 30px;
+    border: 2px solid #ff4d6d;
+    animation: fadeIn 1s ease;
+}
+
+.imgteste {
+    max-width: 100%;
+    height:auto;
+    display: block;
+    border-radius: 15px;
     border: 2px solid #ff4d6d;
     animation: fadeIn 1s ease;
 }
@@ -360,5 +367,35 @@ p {
     
     .heart:after {
         left: 40px;
+    }
+}
+/* Melhorias para experiência mobile */
+@media (max-width: 768px) {
+    .btn-no {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+    }
+    
+    .btn-no:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Feedback visual para interações */
+.btn-no {
+    cursor: pointer;
+    transition: transform 0.2s, left 0.4s ease-out, top 0.4s ease-out;
+}
+
+.btn-no:hover, .btn-no:active {
+    box-shadow: 0 0 20px rgba(255, 149, 0, 0.6) !important;
+}
+
+/* Melhorar acessibilidade para toque */
+@media (hover: none) and (pointer: coarse) {
+    .btn-no {
+        min-height: 50px;
+        min-width: 120px;
     }
 }

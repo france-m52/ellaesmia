@@ -20,29 +20,124 @@ function tryAgain() {
     document.getElementById('screen2').classList.remove('hidden');
 }
 
-// Botão "Não" foge do mouse
-function moveNoButton() {
+// Função para mover o botão "Não" - funciona para mouse e toque
+function moveNoButton(event) {
     const btnNo = document.getElementById('btnNo');
     const container = document.querySelector('.question-box');
     const containerRect = container.getBoundingClientRect();
     
-    // Gerar posição aleatória dentro da caixa da pergunta
-    const maxX = containerRect.width - btnNo.offsetWidth;
-    const maxY = containerRect.height - btnNo.offsetHeight;
+    // Prevenir comportamento padrão
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
     
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
-    
+    // Garantir que o botão tenha posição absoluta
     btnNo.style.position = 'absolute';
+    
+    // Calcular limites
+    const btnWidth = btnNo.offsetWidth;
+    const btnHeight = btnNo.offsetHeight;
+    const maxX = containerRect.width - btnWidth - 20; // Margem de 10px de cada lado
+    const maxY = containerRect.height - btnHeight - 20;
+    
+    // Gerar nova posição aleatória
+    let randomX, randomY;
+    let attempts = 0;
+    const maxAttempts = 10;
+    
+    do {
+        randomX = Math.floor(Math.random() * maxX) + 10;
+        randomY = Math.floor(Math.random() * maxY) + 10;
+        attempts++;
+        
+        // Evitar posição muito próxima do centro (onde está o botão SIM)
+        const centerX = containerRect.width / 2;
+        const centerY = containerRect.height / 2;
+        const distanceFromCenter = Math.sqrt(
+            Math.pow(randomX + btnWidth/2 - centerX, 2) + 
+            Math.pow(randomY + btnHeight/2 - centerY, 2)
+        );
+        
+        // Se está longe o suficiente do centro, aceita a posição
+        if (distanceFromCenter > 100 || attempts >= maxAttempts) {
+            break;
+        }
+    } while (attempts < maxAttempts);
+    
+    // Aplicar nova posição com transição suave
+    btnNo.style.transition = 'all 0.4s ease-out';
     btnNo.style.left = `${randomX}px`;
     btnNo.style.top = `${randomY}px`;
+    
+    // Adicionar efeito visual de movimento
+    btnNo.style.transform = 'scale(1.05)';
+    setTimeout(() => {
+        btnNo.style.transform = 'scale(1)';
+    }, 300);
+    
+    // Se for evento de toque, evitar clique acidental
+    if (event && event.type === 'touchstart') {
+        // Adicionar um pequeno delay antes de permitir clique novamente
+        btnNo.style.pointerEvents = 'none';
+        setTimeout(() => {
+            btnNo.style.pointerEvents = 'auto';
+        }, 500);
+    }
 }
 
-// Clique acidental no "Não" - vai para tela de brincadeira
-document.getElementById('btnNo').addEventListener('click', function() {
-    document.getElementById('screen2').classList.add('hidden');
-    document.getElementById('screen4').classList.remove('hidden');
+// Contador para controlar a frequência dos movimentos no hover
+let hoverTimeout;
+let lastHoverMove = 0;
+const HOVER_COOLDOWN = 300; // ms entre movimentos no hover
+
+function handleHoverMove(event) {
+    const now = Date.now();
+    
+    // Controlar frequência para não mover muito rápido
+    if (now - lastHoverMove > HOVER_COOLDOWN) {
+        moveNoButton(event);
+        lastHoverMove = now;
+    }
+}
+
+// Clique no "Não" - vai para tela de brincadeira
+document.getElementById('btnNo').addEventListener('click', function(event) {
+    // Verificar se o clique foi intencional (o botão não se moveu recentemente)
+    const now = Date.now();
+    if (now - lastHoverMove > 500) { // Se não houve movimento nos últimos 500ms
+        document.getElementById('screen2').classList.add('hidden');
+        document.getElementById('screen4').classList.remove('hidden');
+    }
+    // Se houve movimento recente, o clique é considerado acidental e não faz nada
 });
+
+// Configurar eventos para desktop (mouse) e mobile (toque)
+function setupNoButtonEvents() {
+    const btnNo = document.getElementById('btnNo');
+    
+    // Remover eventos anteriores para evitar duplicação
+    btnNo.removeEventListener('mouseenter', handleHoverMove);
+    btnNo.removeEventListener('touchstart', moveNoButton);
+    btnNo.removeEventListener('click', moveNoButton);
+    
+    // Evento para mouse (desktop)
+    btnNo.addEventListener('mouseenter', handleHoverMove);
+    
+    // Eventos para toque (mobile)
+    btnNo.addEventListener('touchstart', function(event) {
+        moveNoButton(event);
+        // No mobile, também mover no clique para dificultar
+    });
+    
+    // Mover também em alguns cliques (para dificultar mais)
+    btnNo.addEventListener('click', function(event) {
+        // 50% de chance de mover no clique também
+        if (Math.random() > 0.5) {
+            moveNoButton(event);
+        }
+    });
+}
 
 // Sistema de confetes
 function startConfetti() {
@@ -148,4 +243,44 @@ window.onload = function() {
         element.innerHTML = "";
         typeWriter();
     }, 1000);
+    
+    // Configurar eventos do botão "Não" após carregar a página
+    setTimeout(() => {
+        setupNoButtonEvents();
+    }, 1500);
 };
+
+// Detecta se é dispositivo móvel para ajustar comportamento
+function isMobileDevice() {
+    return (('ontouchstart' in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0));
+}
+
+// Movimento aleatório ocasional mesmo sem interação (para dificultar mais)
+function randomMovement() {
+    const btnNo = document.getElementById('btnNo');
+    if (btnNo && !btnNo.classList.contains('hidden')) {
+        // 10% de chance de se mover sozinho a cada 3 segundos
+        if (Math.random() > 0.9) {
+            moveNoButton();
+        }
+    }
+}
+
+// Iniciar movimento aleatório ocasional
+setInterval(randomMovement, 3000);
+
+// Adicionar classe CSS para indicar que pode ser arrastado (opcional)
+document.addEventListener('DOMContentLoaded', function() {
+    const btnNo = document.getElementById('btnNo');
+    if (btnNo) {
+        // Adicionar indicador visual para mobile
+        if (isMobileDevice()) {
+            btnNo.title = "Toque para ver ele fugir!";
+            btnNo.setAttribute('aria-label', 'Botão Não - toque e ele se move');
+        } else {
+            btnNo.title = "Passe o mouse para ver ele fugir!";
+        }
+    }
+});
