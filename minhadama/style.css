@@ -1,0 +1,364 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ecee93 0%, #f1ee0f 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.heart:before, .heart:after {
+    content: "";
+    width: 100px;
+    height: 90px;
+    background-color: #ff4d6d;
+    border-radius: 50%;
+    position: absolute;
+}
+
+
+
+.heart:after {
+    top: 0;
+    left: 50px;
+}
+
+h1 {
+    color: #898b04;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #b4b217;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #dee040;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+p {
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.small-text {
+    font-size: 1rem;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* Botões */
+.btn, .btn-yes, .btn-no, .btn-love, .btn-try-again {
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 15px 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.btn {
+    background: linear-gradient(to right, #e4e145, #ff790c);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+}
+
+.btn-yes {
+    background: linear-gradient(to right, #ffe81d, #e99f30);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 240, 34, 0.4);
+}
+
+.btn-yes:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to right, #ffe81d, #e99f30);
+}
+
+.btn-no {
+    background: linear-gradient(to right, #ff9500, #ff5e3a);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 149, 0, 0.4);
+    position: relative;
+}
+
+.btn-love {
+    background: linear-gradient(to right, #dfd879, #e7eb24);
+    color: white;
+    margin-top: 30px;
+    padding: 15px 30px;
+}
+
+.btn-try-again {
+    background: linear-gradient(to right, #36d1dc, #5b86e5);
+    color: white;
+    margin-top: 20px;
+}
+
+/* Caixa da pergunta */
+.question-box {
+    background: linear-gradient(135deg, #fff5f7, #ffeef2);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+    border: 2px dashed #ff4d6d;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Corações decorativos */
+.hearts-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.heart-icon {
+    color: #ff4d6d;
+    font-size: 2.5rem;
+    animation: float 3s infinite ease-in-out;
+}
+
+.heart-icon:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.heart-icon:nth-child(3) {
+    animation-delay: 1s;
+}
+
+/* Tela de celebração */
+.celebration {
+    position: relative;
+    height: 150px;
+    margin-bottom: 30px;
+}
+
+.main-heart {
+    font-size: 5rem;
+    color: #eeff00;
+    animation: pulse 1.5s infinite;
+}
+
+.star {
+    position: absolute;
+    color: #ffd700;
+    font-size: 2rem;
+    animation: spin 4s infinite linear;
+}
+
+.star:nth-child(2) {
+    top: 20px;
+    left: 50px;
+    animation-delay: 0.3s;
+}
+
+.star:nth-child(3) {
+    top: 60px;
+    right: 60px;
+    animation-delay: 0.6s;
+}
+
+.star:nth-child(4) {
+    bottom: 30px;
+    left: 70px;
+    animation-delay: 0.9s;
+}
+
+.love-message {
+    font-size: 1.4rem;
+    color: #cdcf31;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.promise {
+    font-style: italic;
+    color: #666;
+    border-left: 4px solid #f3f727;
+    padding-left: 15px;
+    margin: 25px 0;
+}
+
+.final-hearts {
+    margin: 30px 0;
+}
+
+.final-hearts i {
+    color: #fdad00;
+    font-size: 2rem;
+    margin: 0 10px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.final-hearts i:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.final-hearts i:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.final-hearts i:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.final-hearts i:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.date-message {
+    background: linear-gradient(135deg, #ffeff3, #ffe4ec);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 30px;
+    border: 2px solid #ff4d6d;
+    animation: fadeIn 1s ease;
+}
+
+/* Cara triste (tela "não") */
+.sad-face {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: shake 0.5s infinite;
+}
+
+.joke {
+    font-size: 1.3rem;
+    color: #ff9500;
+    font-weight: bold;
+}
+
+/* Canvas para confetes */
+#confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Animações */
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1) rotate(-45deg); }
+    50% { transform: scale(1.1) rotate(-45deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.7rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+    
+    p {
+        font-size: 1.1rem;
+    }
+    
+    .btn, .btn-yes, .btn-no, .btn-love, .btn-try-again {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    
+    .heart:after {
+        left: 40px;
+    }
+}

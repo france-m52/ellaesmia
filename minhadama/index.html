@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Micaela 💖</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Fase 1: Mensagem inicial -->
+        <div class="screen" id="screen1">
+         
+            <h1>Oi, Micaela! 💛💛</h1>
+            <p>Tenho algo muito especial para te perguntar...</p>
+            <button class="btn" onclick="nextScreen()">Clique aqui</button>
+        </div>
+
+        <!-- Fase 2: Pergunta -->
+        <div class="screen hidden" id="screen2">
+            <div class="hearts-container">
+                <i class="fas fa-heart heart-icon"></i>
+                <i class="fas fa-heart heart-icon"></i>
+                <i class="fas fa-heart heart-icon"></i>
+            </div>
+            <h2>Você faz os meus dias mais felizes!</h2>
+            <p>Cada momento ao seu lado é especial...</p>
+            <div class="question-box">
+                <h3>Quer ser meu par romantico? 🤔</h3>
+                <div class="buttons">
+                    <button class="btn-yes" onclick="yesAnswer()">SIM!</button>
+                    <button class="btn-no" id="btnNo" onmouseover="moveNoButton()">Não</button>
+                </div>
+            </div>
+            <p class="small-text">Sim: ama deus | Não: ama o diabo 😉</p>
+        </div>
+
+        <!-- Fase 3: Resposta SIM -->
+        <div class="screen hidden" id="screen3">
+            <div class="celebration">
+                <i class="fas fa-heart main-heart"></i>
+                <i class="fas fa-star star"></i>
+                <i class="fas fa-star star"></i>
+                <i class="fas fa-star star"></i>
+            </div>
+            <h2>🎉 SIM! 🎉</h2>
+            <p class="love-message">Você disse SIM! e com essa resposta você ganha os seguintes benefícios: 🦭👇</p>
+            <p>- Um namorado fiel muita coisa! 💍
+                - Poder me ver comendo 1kg de comida no almoço!🥗
+                - Um parceiro pra fazer aquele treinão sinistro! 🏋️
+                - 
+            </p>
+            <p class="promise">Prometo fazer você feliz todos os dias!</p>
+            
+            <div class="final-hearts">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+            
+            <button class="btn-love" onclick="showSurprise()">
+                <i class="fas fa-gift"></i> Clique para uma surpresa
+            </button>
+            
+            <div class="date-message hidden" id="dateMessage">
+                <p>🎀 Nosso primeiro beijo como namorados será inesquecível! 🎀</p>
+                <p>Te amo infinitamente! 💑</p>
+            </div>
+        </div>
+
+        <!-- Fase 4: Resposta NÃO (brincadeira) -->
+        <div class="screen hidden" id="screen4">
+            <div class="sad-face">😢</div>
+            <h2>Ops! Você escolheu "Não"...</h2>
+            <p>Mas eu sei que foi só de brincadeira! 😉</p>
+            <p class="joke">Vou te dar outra chance...</p>
+            <button class="btn-try-again" onclick="tryAgain()">Tentar novamente</button>
+        </div>
+    </div>
+
+    <!-- Efeitos de confete -->
+    <canvas id="confetti"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
