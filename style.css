@@ -369,33 +369,3 @@ p {
         left: 40px;
     }
 }
-/* Melhorias para experiência mobile */
-@media (max-width: 768px) {
-    .btn-no {
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-        user-select: none;
-    }
-    
-    .btn-no:active {
-        transform: scale(0.95);
-    }
-}
-
-/* Feedback visual para interações */
-.btn-no {
-    cursor: pointer;
-    transition: transform 0.2s, left 0.4s ease-out, top 0.4s ease-out;
-}
-
-.btn-no:hover, .btn-no:active {
-    box-shadow: 0 0 20px rgba(255, 149, 0, 0.6) !important;
-}
-
-/* Melhorar acessibilidade para toque */
-@media (hover: none) and (pointer: coarse) {
-    .btn-no {
-        min-height: 50px;
-        min-width: 120px;
-    }
-}
