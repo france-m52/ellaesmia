@@ -257,20 +257,96 @@ p {
     animation-delay: 0.8s;
 }
 
+
+
+/* Estilo para a imagem/gif */
+.imgteste {
+    width: 100%;
+    max-width: 400px; /* Tamanho máximo para desktop */
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.imgteste img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain; /* Mantém a proporção */
+    border-radius: 10px;
+}
+
+/* Ajuste para a mensagem com a imagem */
 .date-message {
     background: linear-gradient(135deg, #ffeff3, #ffe4ec);
     border-radius: 15px;
+    padding: 20px;
+    margin-top: 30px;
     border: 2px solid #ff4d6d;
     animation: fadeIn 1s ease;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Importante! */
 }
 
-.imgteste {
-    max-width: 100%;
-    height:auto;
-    display: block;
-    border-radius: 15px;
-    border: 2px solid #ff4d6d;
-    animation: fadeIn 1s ease;
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .imgteste {
+        max-width: 90%; /* Ocupa 90% da tela no mobile */
+        max-height: 250px; /* Limita altura no mobile */
+    }
+    
+    .imgteste img {
+        max-height: 200px;
+    }
+    
+    .date-message {
+        padding: 15px;
+        margin: 20px 10px;
+        width: calc(100% - 20px); /* Ajusta largura considerando padding */
+    }
+    
+    /* Ajuste para garantir que tudo caiba na tela */
+    #screen3 {
+        padding: 15px;
+        overflow-y: auto; /* Permite rolagem se necessário */
+        max-height: 100vh; /* Limita altura máxima */
+    }
+    
+    .btn-love {
+        width: 100%;
+        max-width: 300px;
+        margin: 15px auto;
+        padding: 12px 20px;
+        font-size: 1.1rem;
+        word-wrap: break-word; /* Quebra texto se necessário */
+        white-space: normal; /* Permite múltiplas linhas */
+        text-align: center;
+    }
+}
+
+/* Ajuste para telas muito pequenas (iPhone SE, etc) */
+@media (max-width: 375px) {
+    .imgteste {
+        max-height: 200px;
+    }
+    
+    .imgteste img {
+        max-height: 180px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
 }
 
 /* Cara triste (tela "não") */
